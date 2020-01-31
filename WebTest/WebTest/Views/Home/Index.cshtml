@@ -1,0 +1,38 @@
+﻿
+@model WebTest.Models.Urls
+@{
+    ViewBag.Title = "URL shortener";
+}
+
+<h2>Shorten a URL</h2>
+@Html.ValidationSummary()
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.TextBoxFor(model => model.Url.Name, new { placeholder = "URL Shortened Name", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(model => model.Url.UrlLink, new { placeholder = "URL Link", @class = "form-control" })
+    </div>
+    <input type="submit" class="btn btn-primary" value="Shorten" />
+}
+
+<table class="table full-width">
+    <thead>
+        <tr>
+            <th>Url Shortened Name</th>
+            <th>Url Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var url in Model.UrlList)
+        {
+            <tr>
+                <td><a href="@(url.UrlLink)" target="_blank">@(url.Name)</a></td>
+                <td>@Html.DisplayFor(modelItem => url.UrlLink)</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
